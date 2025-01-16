@@ -11,59 +11,52 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class WiseSayingService {
 
-    @Autowired
-    private WiseSayingRepository wiseSayingRepository;
-    private List<WiseSaying> wiseSayingList;
-    private int lastId;
+    private final WiseSayingRepository wiseSayingRepository;
 
-    public WiseSayingService() {
-        this.wiseSayingList = new ArrayList<>();
-        this.lastId = 0;
-
-        WiseSaying w1 = WiseSaying.builder()
-                .id(++lastId)
-                .content("삶이 있는 한 희망은 있다.2")
-                .author("키케로")
-                .build();
-
-        WiseSaying w2 = WiseSaying.builder()
-                .id(++lastId)
-                .content("나의 죽음을 알리지 마라.2")
-                .author("이순신")
-                .build();
-
-        wiseSayingList.add(w1);
-        wiseSayingList.add(w2);
-    }
+//    public WiseSayingService() {
+//        this.wiseSayingList = new ArrayList<>();
+//        this.lastId = 0;
+//
+//        WiseSaying w1 = WiseSaying.builder()
+//                .id(++lastId)
+//                .content("삶이 있는 한 희망은 있다.2")
+//                .author("키케로")
+//                .build();
+//
+//        WiseSaying w2 = WiseSaying.builder()
+//                .id(++lastId)
+//                .content("나의 죽음을 알리지 마라.2")
+//                .author("이순신")
+//                .build();
+//
+//        wiseSayingList.add(w1);
+//        wiseSayingList.add(w2);
+//    }
 
     public Optional<WiseSaying> getItem(int id) {
-        return wiseSayingList.stream()
-                .filter(w -> w.getId() == id)
-                .findFirst();
+        return wiseSayingRepository.findById(id);
     }
 
     public List<WiseSaying> getAllItems() {
-        return wiseSayingList;
+        return wiseSayingRepository.findAll();
     }
 
     public WiseSaying write(String content, String author) {
+
         WiseSaying wiseSaying = WiseSaying.builder()
-                .id(++lastId)
                 .content(content)
                 .author(author)
                 .build();
 
-        wiseSayingList.add(wiseSaying);
-        return wiseSaying;
+        return wiseSayingRepository.save(wiseSaying);
     }
 
 
     public boolean deleteById(int id) {
-        return wiseSayingList.removeIf(
-                w -> w.getId() == id
-        );
+        return wiseSayingRepository.deleteById(id);
     }
 
     public WiseSaying modify(int id, String content, String author) {
