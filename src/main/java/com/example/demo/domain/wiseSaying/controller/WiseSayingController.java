@@ -21,10 +21,21 @@ public class WiseSayingController {
     }
 
     @GetMapping("/wiseSaying/write")
-    public WiseSaying writeWiseSaying(@RequestParam(defaultValue = "no name") String content, @RequestParam("author")String author) { // @RequestParam(...) 과 String ... 같으면 생략 가능
+    public WiseSaying writeWiseSaying(String content, @RequestParam(defaultValue = "no name") String author) { // @RequestParam(...) 과 String ... 같으면 생략 가능
         System.out.println("content = " + content);
         System.out.println("author = " + author);
+
         return wiseSayingService.write(content, author);
+    }
+
+    @GetMapping("/wiseSayings/1")
+    public WiseSaying getItem1() {
+        return wiseSayingService.getItem(1).orElse(null);
+    }
+
+    @GetMapping("/wiseSayings/2")
+    public WiseSaying getItem2() {
+        return wiseSayingService.getItem(2).orElse(null);
     }
 
 }
