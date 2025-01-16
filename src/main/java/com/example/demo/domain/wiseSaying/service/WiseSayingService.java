@@ -60,4 +60,14 @@ public class WiseSayingService {
         );
     }
 
+    public WiseSaying modify(int id, String content, String author) {
+        Optional<WiseSaying> opWiseSaying = getItem(id);
+        if(opWiseSaying.isEmpty()) {
+            throw new IllegalArgumentException("해당 id의 명언이 없습니다.");
+        }
+        WiseSaying wiseSaying = opWiseSaying.get();
+        wiseSaying.setContent(content);
+        wiseSaying.setAuthor(author);
+        return wiseSaying;
+    }
 }
