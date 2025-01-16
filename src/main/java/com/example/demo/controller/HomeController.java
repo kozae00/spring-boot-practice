@@ -27,4 +27,46 @@ public class HomeController {
         age++;
         return age;
     }
+
+    @GetMapping("/byte")
+    @ResponseBody
+    public byte getByte() {
+        return 1;
+    }
+
+    @GetMapping("/short")
+    @ResponseBody
+    public short getShort() {
+        return 1;
+    }
+
+    @GetMapping("/long")
+    @ResponseBody
+    public long getLong() {
+        return 1;
+    }
+
+    @GetMapping("/float")
+    @ResponseBody
+    public float getFloat() {
+        return 3.14f;
+    }
+
+    @GetMapping("/double")
+    @ResponseBody
+    public double getDouble() {
+        return 3.14;
+    }
+
+    @GetMapping("/char")
+    @ResponseBody
+    public char getChar() {
+        return 'A';
+    }
+
+    @GetMapping("/boolean")
+    @ResponseBody
+    public boolean getBoolean() {
+        return true;
+    }
 }
