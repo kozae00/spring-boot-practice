@@ -13,4 +13,9 @@ public class HomeController {
         return "hello";
     }
 
+    @GetMapping("/introduce")
+    @ResponseBody
+    public String introduce() {
+        return "안녕하세요. 저는 홍길동입니다.";
+    }
 }
