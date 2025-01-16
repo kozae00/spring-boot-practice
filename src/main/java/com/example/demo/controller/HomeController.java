@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
+@ResponseBody
 public class HomeController {
 
     private int age = 0;
@@ -103,6 +105,36 @@ public class HomeController {
                 .body("내용")
                 .isDeleted(false)
                 .build();
+    }
+
+    @GetMapping("/mapList")
+    public List<Map<String, String>> getMapList() {
+        return List.of(
+                Map.of("k1", "v1", "k2", "v2"),
+                Map.of("k1", "v3", "k2", "v4")
+        );
+    }
+
+    @GetMapping("/articleList")
+    public List<Article> getArticleList() {
+        return List.of(
+                Article.builder().title("제목1").body("내용1").isDeleted(false).build(),
+                Article.builder().title("제목2").body("내용2").isDeleted(false).build()
+        );
+    }
+
+    @GetMapping("/articleList.html")
+    public String getArticleListHtml() {
+        Article a1 = Article.builder().title("제목1").body("내용1").isDeleted(false).build();
+        Article a2 = Article.builder().title("제목2").body("내용2").isDeleted(false).build();
+
+        List<Article> articleList = List.of(a1, a2);
+
+        String lis = articleList.stream()
+                .map(a -> "<li>%s</li>".formatted(a.getTitle()))
+                .collect(Collectors.joining());
+
+        return "<ul>" + lis + "</ul>";
     }
 }
 
