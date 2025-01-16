@@ -20,8 +20,8 @@ public class WiseSayingController {
         return wiseSayingService.getAllItems();
     }
 
-    @GetMapping("/wiseSayings/write")
-    public WiseSaying writeWiseSayings(String content, @RequestParam(defaultValue = "no name") String author) { // @RequestParam(...) 과 String ... 같으면 생략 가능
+    @GetMapping("/wiseSaying/write")
+    public WiseSaying writeWiseSaying(String content, @RequestParam(defaultValue = "no name") String author) {
         System.out.println("content = " + content);
         System.out.println("author = " + author);
 
@@ -29,7 +29,7 @@ public class WiseSayingController {
     }
 
     @GetMapping("/wiseSayings/{id}")
-    public WiseSaying getItem(@PathVariable("id") int id) { // @PathVariable("id") int id 변수명이 같으면 @pPathVariable(...)생략 가능
+    public WiseSaying getItem(@PathVariable int id) {
         return wiseSayingService.getItem(id).orElse(null);
     }
 
@@ -42,4 +42,5 @@ public class WiseSayingController {
     public WiseSaying modifyItem(@PathVariable int id, String content, String author) {
         return wiseSayingService.modify(id, content, author);
     }
+
 }
