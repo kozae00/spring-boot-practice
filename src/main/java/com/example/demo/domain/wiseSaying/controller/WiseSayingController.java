@@ -30,8 +30,13 @@ public class WiseSayingController {
     }
 
     @GetMapping("/wiseSayings/{id}")
-    public WiseSaying getItem1(@PathVariable("id") int id) { // @PathVariable("id") int id 변수명이 같으면 @pPathVariable(...)생략 가능
+    public WiseSaying getItem(@PathVariable("id") int id) { // @PathVariable("id") int id 변수명이 같으면 @pPathVariable(...)생략 가능
         return wiseSayingService.getItem(id).orElse(null);
+    }
+
+    @GetMapping("/wiseSayings/{id}/delete")
+    public boolean deleteItem(@PathVariable int id) {
+        return wiseSayingService.deleteById(id);
     }
 
 }
