@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -90,4 +92,18 @@ public class HomeController {
     public Map<String, String> getMap() {
         return Map.of("k1", "v1", "k2","v2");
     }
+
+    @GetMapping("/article")
+    @ResponseBody
+    public Article getArticle(){
+        return new Article(1, "제목", "내용");
+    }
+}
+
+@Getter
+@AllArgsConstructor
+class Article {
+    private int id = 1;
+    private String title;
+    private String body;
 }
